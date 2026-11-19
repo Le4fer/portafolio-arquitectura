@@ -1,0 +1,1506 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- =========================================================================
+         TÍTULO DE LA PESTAÑA DEL NAVEGADOR
+         Puedes agregar tu nombre al final si lo deseas.
+         ========================================================================= -->
+    <title>Portafolio Digital | Arquitectura del Computador - UNETI</title>
+
+    <!-- Tailwind CSS vía CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Fuentes Google: Inter (cuerpo) y JetBrains Mono (detalles técnicos/código) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Configuración personalizada de Tailwind para paleta Dark Neon UI -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        cyber: {
+                            bg: '#070d14',
+                            surface: '#0b131e',
+                            card: '#0f1926',
+                            cyan: '#00e5ff',
+                            blue: '#0ea5e9',
+                            border: 'rgba(0, 229, 255, 0.18)',
+                        }
+                    },
+                    boxShadow: {
+                        'neon': '0 0 20px rgba(0, 229, 255, 0.18)',
+                        'neon-strong': '0 0 30px rgba(0, 229, 255, 0.35)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Estilos base y efectos de brillo sutil (Glassmorphism & Grid) */
+        body {
+            background-color: #070d14;
+            color: #e2e8f0;
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(0, 229, 255, 0.06) 0%, transparent 40%),
+                radial-gradient(circle at 85% 75%, rgba(14, 165, 233, 0.06) 0%, transparent 40%);
+        }
+
+        .bg-grid-pattern {
+            background-size: 36px 36px;
+            background-image: 
+                linear-gradient(to right, rgba(0, 229, 255, 0.04) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 229, 255, 0.04) 1px, transparent 1px);
+        }
+
+        .glass-panel {
+            background: rgba(11, 19, 30, 0.78);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 229, 255, 0.16);
+        }
+
+        .glass-card {
+            background: linear-gradient(145deg, rgba(15, 25, 38, 0.9) 0%, rgba(9, 15, 24, 0.95) 100%);
+            border: 1px solid rgba(0, 229, 255, 0.14);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(0, 229, 255, 0.48);
+            box-shadow: 0 10px 30px -10px rgba(0, 229, 255, 0.22);
+            transform: translateY(-4px);
+        }
+
+        .text-gradient-cyan {
+            background: linear-gradient(90deg, #ffffff 0%, #00e5ff 55%, #0ea5e9 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Personalización de barra de desplazamiento */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #070d14;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #16263b;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00e5ff;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-cyan-500/30 selection:text-cyan-200">
+
+    <!-- =========================================================================
+         1. BARRA DE NAVEGACIÓN SUPERIOR (NAVBAR FIJA)
+         ========================================================================= -->
+    <header class="fixed top-0 inset-x-0 z-40 glass-panel border-b border-cyan-500/15">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo / Título Institucional -->
+                <a href="#inicio" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-400/30 flex items-center justify-center text-cyan-400 group-hover:shadow-neon transition-all">
+                        <!-- Ícono SVG de Microchip / Hardware -->
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <span class="font-bold tracking-tight text-white text-sm sm:text-base block leading-none">
+                            UNETI <span class="text-cyan-400">|</span> Arquitectura
+                        </span>
+                        <span class="text-[11px] font-mono text-slate-400 tracking-wider uppercase">Portafolio Digital</span>
+                    </div>
+                </a>
+
+                <!-- Enlaces de Navegación (Escritorio) -->
+                <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-slate-300">
+                    <a href="#inicio" class="hover:text-cyan-400 transition-colors">Inicio</a>
+                    <a href="#sobre-mi" class="hover:text-cyan-400 transition-colors">Sobre Mí</a>
+                    <a href="#laboratorio" class="hover:text-cyan-400 transition-colors">Laboratorio (SD1 - SD4)</a>
+                    <a href="#competencias" class="hover:text-cyan-400 transition-colors">Competencias</a>
+                </nav>
+
+                <!-- Botón Destacado Derecha + Botón Menú Móvil -->
+                <div class="flex items-center gap-3">
+                    <span class="hidden sm:inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-semibold bg-cyan-500/10 text-cyan-300 border border-cyan-400/30 shadow-neon">
+                        <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+                        Trayecto I - PNFI
+                    </span>
+
+                    <!-- Botón hamburguesa para dispositivos móviles -->
+                    <button id="mobile-menu-btn" type="button" class="md:hidden p-2 rounded-lg text-slate-300 hover:text-cyan-400 hover:bg-slate-800/60 focus:outline-none" aria-label="Abrir menú">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Menú Desplegable Móvil -->
+        <div id="mobile-menu" class="hidden md:hidden bg-[#09111c] border-b border-cyan-500/20 px-4 pt-2 pb-4 space-y-2">
+            <a href="#inicio" class="block px-3 py-2 rounded-lg text-sm font-medium text-slate-200 hover:bg-cyan-500/10 hover:text-cyan-400">Inicio</a>
+            <a href="#sobre-mi" class="block px-3 py-2 rounded-lg text-sm font-medium text-slate-200 hover:bg-cyan-500/10 hover:text-cyan-400">Sobre Mí</a>
+            <a href="#laboratorio" class="block px-3 py-2 rounded-lg text-sm font-medium text-slate-200 hover:bg-cyan-500/10 hover:text-cyan-400">Laboratorio (SD1 - SD4)</a>
+            <a href="#competencias" class="block px-3 py-2 rounded-lg text-sm font-medium text-slate-200 hover:bg-cyan-500/10 hover:text-cyan-400">Competencias</a>
+            <div class="pt-2 border-t border-slate-800">
+                <span class="inline-block px-3 py-1 rounded-full text-xs font-mono text-cyan-300 bg-cyan-500/10 border border-cyan-500/30">Trayecto I - PNFI</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- =========================================================================
+         2. SECCIÓN HERO (PORTADA INSTITUCIONAL LLAMATIVA)
+         ========================================================================= -->
+    <section id="inicio" class="relative pt-28 pb-20 lg:pt-36 lg:pb-28 bg-grid-pattern overflow-hidden">
+        <!-- Resplandor ambiental decorativo -->
+        <div class="absolute top-24 left-1/2 -translate-x-1/2 w-[600px] h-[280px] bg-cyan-500/10 blur-[120px] rounded-full pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                
+                <!-- Columna Principal: Identificación Institucional y Título -->
+                <div class="lg:col-span-7 space-y-6">
+                    <!-- Badge Institucional -->
+                    <div class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-cyan-500/10 border border-cyan-400/30 text-cyan-300 text-xs font-mono tracking-wide">
+                        <svg class="w-4 h-4 shrink-0 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                        </svg>
+                        <span>UNIVERSIDAD NACIONAL EXPERIMENTAL DE LAS TELECOMUNICACIONES E INFORMÁTICA (UNETI)</span>
+                    </div>
+
+                    <!-- Título y Subtítulo -->
+                    <div class="space-y-3">
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight text-gradient-cyan">
+                            Portafolio Digital de Evidencias
+                        </h1>
+                        <h2 class="text-xl sm:text-2xl font-semibold text-slate-200">
+                            Unidad Curricular: <span class="text-cyan-400">Arquitectura del Computador</span>
+                        </h2>
+                    </div>
+
+                    <!-- Descripción Introductoria -->
+                    <p class="text-slate-400 text-base sm:text-lg leading-relaxed max-w-2xl">
+                        Bitácora técnica y académica diseñada para documentar las prácticas de laboratorio, análisis comparativos de hardware, diagnóstico de sistemas y la evolución desde la arquitectura clásica de Von Neumann hacia los paradigmas emergentes de la computación cuántica.
+                    </p>
+
+                    <!-- Botones de Acción -->
+                    <div class="flex flex-wrap items-center gap-4 pt-2">
+                        <a href="#laboratorio" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-cyan-400 to-sky-500 text-slate-950 font-bold text-sm shadow-neon hover:shadow-neon-strong hover:brightness-110 transition-all">
+                            <span>Explorar Prácticas SD1</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                            </svg>
+                        </a>
+                        <a href="#sobre-mi" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl glass-panel text-slate-200 hover:text-cyan-300 hover:border-cyan-400/50 font-semibold text-sm transition-all">
+                            <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                            </svg>
+                            <span>Ver Perfil del Autor</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Columna Derecha: Tarjeta de Resumen / Métricas Académicas -->
+                <div class="lg:col-span-5">
+                    <div class="glass-panel rounded-2xl p-6 sm:p-7 shadow-neon relative overflow-hidden">
+                        <!-- Decoración superior tipo ventana de terminal -->
+                        <div class="flex items-center justify-between pb-4 mb-5 border-b border-slate-800">
+                            <div class="flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-full bg-rose-500/80"></span>
+                                <span class="w-3 h-3 rounded-full bg-amber-400/80"></span>
+                                <span class="w-3 h-3 rounded-full bg-emerald-400/80"></span>
+                            </div>
+                            <span class="text-xs font-mono text-cyan-400">SYS_STATUS // ACTIVO</span>
+                        </div>
+
+                        <div class="space-y-4">
+                            <!-- Métrica 1 -->
+                            <div class="flex items-center gap-4 p-3.5 rounded-xl bg-slate-900/70 border border-slate-800/80">
+                                <div class="w-11 h-11 rounded-lg bg-cyan-500/15 text-cyan-400 flex items-center justify-center shrink-0">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-mono text-slate-400">ESTRUCTURA CURRICULAR</p>
+                                    <p class="text-sm sm:text-base font-bold text-white">4 Sesiones Didácticas <span class="text-cyan-400 text-xs font-mono">(SD1 Activa)</span></p>
+                                </div>
+                            </div>
+
+                            <!-- Métrica 2 -->
+                            <div class="flex items-center gap-4 p-3.5 rounded-xl bg-slate-900/70 border border-slate-800/80">
+                                <div class="w-11 h-11 rounded-lg bg-sky-500/15 text-sky-400 flex items-center justify-center shrink-0">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-mono text-slate-400">EVIDENCIAS DE LABORATORIO</p>
+                                    <p class="text-sm sm:text-base font-bold text-white">5 Prácticas Documentadas</p>
+                                </div>
+                            </div>
+
+                            <!-- Métrica 3 -->
+                            <div class="flex items-center gap-4 p-3.5 rounded-xl bg-slate-900/70 border border-slate-800/80">
+                                <div class="w-11 h-11 rounded-lg bg-indigo-500/15 text-indigo-400 flex items-center justify-center shrink-0">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-mono text-slate-400">PROGRAMA ACADÉMICO</p>
+                                    <p class="text-sm sm:text-base font-bold text-white">PNF en Informática - Trayecto I</p>
+                                </div>
+                            </div>
+
+                            <!-- Métrica 4 -->
+                            <div class="flex items-center gap-4 p-3.5 rounded-xl bg-slate-900/70 border border-slate-800/80">
+                                <div class="w-11 h-11 rounded-lg bg-emerald-500/15 text-emerald-400 flex items-center justify-center shrink-0">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-mono text-slate-400">DOCENTE FACILITADOR</p>
+                                    <!-- Puedes editar el nombre del facilitador aquí si cambia en futuras secciones -->
+                                    <p class="text-sm sm:text-base font-bold text-white">Facilitador: Carlos Ollarves</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================================================
+         3. SECCIÓN 'SOBRE MÍ' (AUTOR - PRODUCCIÓN PROFESIONAL)
+         INSTRUCCIONES IMPORTANTES:
+         - Reemplaza los corchetes [TU NOMBRE COMPLETO AQUÍ] y [V-XX.XXX.XXX] con tus datos reales.
+         - Para la fotografía: la rúbrica exige una FOTO FORMAL (evitar avatares o caricaturas).
+         ========================================================================= -->
+    <section id="sobre-mi" class="py-16 lg:py-24 relative">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-10">
+                <span class="text-xs font-mono uppercase tracking-widest text-cyan-400">Identificación del Participante</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-white mt-1">Sobre el Autor</h2>
+            </div>
+
+            <div class="glass-panel rounded-3xl p-6 sm:p-10 shadow-neon">
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-center">
+                    
+                    <!-- COLUMNA IZQUIERDA: MARCO PARA FOTOGRAFÍA FORMAL -->
+                    <div class="md:col-span-4 flex flex-col items-center">
+                        <div class="relative group w-60 h-72 sm:w-64 sm:h-80 rounded-2xl p-1.5 bg-gradient-to-b from-cyan-400 via-sky-500 to-slate-800 shadow-neon">
+                            <div class="w-full h-full rounded-xl bg-[#09111c] overflow-hidden flex flex-col items-center justify-center relative">
+                                
+                                <!-- =================================================================
+                                     REEMPLAZAR SRC CON TU FOTO FORMAL (ej. img/foto-perfil.jpg) - EVITAR AVATARES
+                                     Cuando tengas tu archivo de foto formal en tu carpeta o enlace,
+                                     borra el bloque <div id="foto-placeholder"> y descomenta la etiqueta <img> de abajo:
+                                     ================================================================= -->
+                                
+                                <!-- <img src="img/foto-perfil.jpg" alt="Fotografía Formal del Autor" class="w-full h-full object-cover"> -->
+
+                                <!--<div id="foto-placeholder" class="w-full h-full flex flex-col items-center justify-center p-5 text-center bg-slate-900/90">
+                                    
+                                    <svg class="w-24 h-24 text-cyan-400/70 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.3" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    </svg>
+                                    <span class="text-xs font-mono text-cyan-300 font-semibold uppercase tracking-wider">Espacio para Foto Formal</span>
+                                    <p class="text-[11px] text-slate-400 mt-1.5 leading-snug">
+                                        Reemplazar en el código HTML con tu fotografía formal (sin avatares).
+                                    </p>
+                                </div> -->
+
+                                <img src="img/foto-perfil.jpeg" alt="Fotografía Formal del Autor" class="w-full h-full object-cover">
+
+                            </div>
+                        </div>
+                        <span class="mt-3 text-xs font-mono text-slate-400">Producción Académica Profesional</span>
+                    </div>
+
+                    <!-- COLUMNA DERECHA: DATOS PERSONALES Y PERFIL ACADÉMICO -->
+                    <div class="md:col-span-8 space-y-6">
+                        <div>
+                            <div class="inline-block px-3 py-1 rounded-md bg-cyan-500/10 border border-cyan-500/25 text-cyan-300 text-xs font-mono mb-2">
+                                ESTUDIANTE PNF EN INFORMÁTICA
+                            </div>
+                            
+                            <!-- Coloca tu nombre y apellidos -->
+                            <h3 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                                Deimer Didier Palma Monsalve
+                            </h3>
+                        </div>
+
+                        <!-- Cuadrícula de Ficha Técnica del Estudiante -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800">
+                                <span class="text-[11px] font-mono text-slate-400 uppercase block">Documento de Identidad</span>
+                                <!-- Coloca tu número de cédula -->
+                                <span class="text-sm font-semibold text-cyan-300 font-mono">V-31.796.146</span>
+                            </div>
+
+                            <div class="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800">
+                                <span class="text-[11px] font-mono text-slate-400 uppercase block">Trayecto y Sección</span>
+                                <!-- Edita tu sección si es necesario -->
+                                <span class="text-sm font-semibold text-white">Trayecto 1 - Sección 13C</span>
+                            </div>
+
+                            <div class="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800">
+                                <span class="text-[11px] font-mono text-slate-400 uppercase block">Institución</span>
+                                <span class="text-sm font-semibold text-white">UNETI (Sede Nacional)</span>
+                            </div>
+
+                            <div class="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800">
+                                <span class="text-[11px] font-mono text-slate-400 uppercase block">Ubicación</span>
+                                <span class="text-sm font-semibold text-white">Caracas, Venezuela</span>
+                            </div>
+                        </div>
+
+                        <!-- Biografía / Perfil Profesional Editable -->
+                        <div class="space-y-2">
+                            <h4 class="text-sm font-mono uppercase tracking-wider text-cyan-400">Perfil Académico y Enfoque Técnico</h4>
+                            <!-- Puedes personalizar este párrafo con tus propios intereses en informática -->
+                            <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                                Estudiante del Programa Nacional de Formación (PNF) en Informática en la Universidad Nacional Experimental de las Telecomunicaciones e Informática (UNETI). Enfocado en comprender a profundidad la estructura interna del computador, el diagnóstico técnico de hardware, el mantenimiento preventivo y correctivo, así como el estudio de arquitecturas de procesamiento emergentes para el desarrollo tecnológico soberano.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN COMPETENCIAS TÉCNICAS - REEMPLAZAR LÍNEAS 394-512 -->
+    <section id="competencias" class="py-20 px-6 bg-[#0a0e1a] relative overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(6,182,212,0.05),transparent_50%)]"></div>
+        
+        <div class="max-w-7xl mx-auto relative z-10">
+            <!-- Header -->
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <div>
+                    <span class="text-cyan-400 font-mono text-sm tracking-wider">PERFIL PROFESIONAL</span>
+                    <h2 class="text-4xl font-bold text-white mt-2">Stack Tecnológico & Dominio</h2>
+                    <p class="text-gray-400 mt-2 font-mono text-sm">Auxiliar de Infraestructura Tecnológica | DevOps Engineer</p>
+                </div>
+                <div class="flex items-end">
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Ecosistema de herramientas y tecnologías dominadas en entornos productivos de infraestructura, 
+                        automatización, monitoreo y soporte técnico multinivel.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Grid de Categorías -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="skillGrid">
+                
+                <!-- Infraestructura y Virtualización -->
+                <div class="skill-card group relative bg-[#0f1629] border border-cyan-900/30 rounded-xl p-6 hover:border-cyan-500/60 transition-all duration-300 hover:shadow-[0_0_30px_rgba(6,182,212,0.15)]">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 bg-cyan-500/10 border border-cyan-500/30 rounded-lg flex items-center justify-center">
+                                <svg class="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-white font-bold text-lg">Infraestructura & Virtualización</h3>
+                                <span class="text-cyan-400 font-mono text-xs">92% DOMINIO</span>
+                            </div>
+                        </div>
+                        <svg class="w-5 h-5 text-cyan-400 group-hover:rotate-180 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </div>
+                    
+                    <div class="h-1.5 bg-gray-800 rounded-full overflow-hidden mb-4">
+                        <div class="h-full bg-gradient-to-r from-cyan-500 to-cyan-400 rounded-full" style="width: 92%"></div>
+                    </div>
+
+                    <div class="skill-details max-h-0 overflow-hidden group-hover:max-h-96 transition-all duration-500">
+                        <div class="pt-4 border-t border-cyan-900/30 space-y-3">
+                            <div class="skill-item flex items-center gap-2 text-sm">
+                                <span class="w-2 h-2 bg-cyan-400 rounded-full"></span>
+                                <span class="text-gray-300">Proxmox VE</span>
+                                <span class="text-gray-500 text-xs ml-auto">Virtualización</span>
+                            </div>
+                            <div class="skill-item flex items-center gap-2 text-sm">
+                                <span class="w-2 h-2 bg-cyan-400 rounded-full"></span>
+                                <span class="text-gray-300">Fortigate</span>
+                                <span class="text-gray-500 text-xs ml-auto">Firewall/UTM</span>
+                            </div>
+                            <div class="skill-item flex items-center gap-2 text-sm">
+                                <span class="w-2 h-2 bg-cyan-400 rounded-full"></span>
+                                <span class="text-gray-300">Switch 3Com</span>
+                                <span class="text-gray-500 text-xs ml-auto">Networking</span>
+                            </div>
+                            <div class="skill-item flex items-center gap-2 text-sm">
+                                <span class="w-2 h-2 bg-cyan-400 rounded-full"></span>
+                                <span class="text-gray-300">HiPath</span>
+                                <span class="text-gray-500 text-xs ml-auto">Telefonía IP</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Monitoreo y Observabilidad -->
+                <div class="skill-card group relative bg-[#0f1629] border border-cyan-900/30 rounded-xl p-6 hover:border-cyan-500/60 transition-all duration-300 hover:shadow-[0_0_30px_rgba(6,182,212,0.15)]">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 bg-green-500/10 border border-green-500/30 rounded-lg flex items-center justify-center">
+                                <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-white font-bold text-lg">Monitoreo & Observabilidad</h3>
+                                <span class="text-green-400 font-mono text-xs">88% DOMINIO</span>
+                            </div>
+                        </div>
+                        <svg class="w-5 h-5 text-green-400 group-hover:rotate-180 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </div>
+                    
+                    <div class="h-1.5 bg-gray-800 rounded-full overflow-hidden mb-4">
+                        <div class="h-full bg-gradient-to-r from-green-500 to-green-400 rounded-full" style="width: 88%"></div>
+                    </div>
+
+                    <div class="skill-details max-h-0 overflow-hidden group-hover:max-h-96 transition-all duration-500">
+                        <div class="pt-4 border-t border-green-900/30 space-y-3">
+                            <div class="skill-item flex items-center gap-2 text-sm">
+                                <span class="w-2 h-2 bg-green-400 rounded-full"></span>
+                                <span class="text-gray-300">Grafana</span>
+                                <span class="text-gray-500 text-xs ml-auto">Dashboards</span>
+                            </div>
+                            <div class="skill-item flex items-center gap-2 text-sm">
+                                <span class="w-2 h-2 bg-green-400 rounded-full"></span>
+                                <span class="text-gray-300">Zabbix</span>
+                                <span class="text-gray-500 text-xs ml-auto">Monitoring</span>
+                            </div>
+                            <div class="skill-item flex items-center gap-2 text-sm">
+                                <span class="w-2 h-2 bg-green-400 rounded-full"></span>
+                                <span class="text-gray-300">Uptime Kuma</span>
+                                <span class="text-gray-500 text-xs ml-auto">Uptime/Status</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DevOps y CI/CD -->
+                <div class="skill-card group relative bg-[#0f1629] border border-cyan-900/30 rounded-xl p-6 hover:border-cyan-500/60 transition-all duration-300 hover:shadow-[0_0_30px_rgba(6,182,212,0.15)]">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 bg-violet-500/10 border border-violet-500/30 rounded-lg flex items-center justify-center">
+                                <svg class="w-6 h-6 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-white font-bold text-lg">DevOps & CI/CD</h3>
+                                <span class="text-violet-400 font-mono text-xs">90% DOMINIO</span>
+                            </div>
+                        </div>
+                        <svg class="w-5 h-5 text-violet-400 group-hover:rotate-180 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </div>
+                    
+                    <div class="h-1.5 bg-gray-800 rounded-full overflow-hidden mb-4">
+                        <div class="h-full bg-gradient-to-r from-violet-500 to-violet-400 rounded-full" style="width: 90%"></div>
+                    </div>
+
+                    <div class="skill-details max-h-0 overflow-hidden group-hover:max-h-96 transition-all duration-500">
+                        <div class="pt-4 border-t border-violet-900/30 space-y-3">
+                            <div class="skill-item flex items-center gap-2 text-sm">
+                                <span class="w-2 h-2 bg-violet-400 rounded-full"></span>
+                                <span class="text-gray-300">Git</span>
+                                <span class="text-gray-500 text-xs ml-auto">Version Control</span>
+                            </div>
+                            <div class="skill-item flex items-center gap-2 text-sm">
+                                <span class="w-2 h-2 bg-violet-400 rounded-full"></span>
+                                <span class="text-gray-300">GitHub Actions</span>
+                                <span class="text-gray-500 text-xs ml-auto">Automation</span>
+                            </div>
+                            <div class="skill-item flex items-center gap-2 text-sm">
+                                <span class="w-2 h-2 bg-violet-400 rounded-full"></span>
+                                <span class="text-gray-300">GitLab</span>
+                                <span class="text-gray-500 text-xs ml-auto">CI/CD Pipeline</span>
+                            </div>
+                            <div class="skill-item flex items-center gap-2 text-sm">
+                                <span class="w-2 h-2 bg-violet-400 rounded-full"></span>
+                                <span class="text-gray-300">SSH</span>
+                                <span class="text-gray-500 text-xs ml-auto">Remote Access</span>
+                            </div>
+                            <div class="skill-item flex items-center gap-2 text-sm">
+                                <span class="w-2 h-2 bg-violet-400 rounded-full"></span>
+                                <span class="text-gray-300">Tailscale</span>
+                                <span class="text-gray-500 text-xs ml-auto">Zero Trust VPN</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Desarrollo y Programación -->
+                <div class="skill-card group relative bg-[#0f1629] border border-cyan-900/30 rounded-xl p-6 hover:border-cyan-500/60 transition-all duration-300 hover:shadow-[0_0_30px_rgba(6,182,212,0.15)]">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 bg-amber-500/10 border border-amber-500/30 rounded-lg flex items-center justify-center">
+                                <svg class="w-6 h-6 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-white font-bold text-lg">Desarrollo & Scripting</h3>
+                                <span class="text-amber-400 font-mono text-xs">85% DOMINIO</span>
+                            </div>
+                        </div>
+                        <svg class="w-5 h-5 text-amber-400 group-hover:rotate-180 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </div>
+                    
+                    <div class="h-1.5 bg-gray-800 rounded-full overflow-hidden mb-4">
+                        <div class="h-full bg-gradient-to-r from-amber-500 to-amber-400 rounded-full" style="width: 85%"></div>
+                    </div>
+
+                    <div class="skill-details max-h-0 overflow-hidden group-hover:max-h-96 transition-all duration-500">
+                        <div class="pt-4 border-t border-amber-900/30 space-y-3">
+                            <div class="skill-item flex items-center gap-2 text-sm">
+                                <span class="w-2 h-2 bg-amber-400 rounded-full"></span>
+                                <span class="text-gray-300">Python</span>
+                                <span class="text-gray-500 text-xs ml-auto">Automation/Scripts</span>
+                            </div>
+                            <div class="skill-item flex items-center gap-2 text-sm">
+                                <span class="w-2 h-2 bg-amber-400 rounded-full"></span>
+                                <span class="text-gray-300">PHP</span>
+                                <span class="text-gray-500 text-xs ml-auto">Backend/Web</span>
+                            </div>
+                            <div class="skill-item flex items-center gap-2 text-sm">
+                                <span class="w-2 h-2 bg-amber-400 rounded-full"></span>
+                                <span class="text-gray-300">CSS</span>
+                                <span class="text-gray-500 text-xs ml-auto">Styling</span>
+                            </div>
+                            <div class="skill-item flex items-center gap-2 text-sm">
+                                <span class="w-2 h-2 bg-amber-400 rounded-full"></span>
+                                <span class="text-gray-300">Pseudocódigo</span>
+                                <span class="text-gray-500 text-xs ml-auto">Algoritmia</span>
+                            </div>
+                            <div class="skill-item flex items-center gap-2 text-sm">
+                                <span class="w-2 h-2 bg-amber-400 rounded-full"></span>
+                                <span class="text-gray-300">VSCode</span>
+                                <span class="text-gray-500 text-xs ml-auto">IDE Principal</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Soporte Técnico Multinivel -->
+                <div class="skill-card group relative bg-[#0f1629] border border-cyan-900/30 rounded-xl p-6 hover:border-cyan-500/60 transition-all duration-300 hover:shadow-[0_0_30px_rgba(6,182,212,0.15)]">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 bg-rose-500/10 border border-rose-500/30 rounded-lg flex items-center justify-center">
+                                <svg class="w-6 h-6 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-white font-bold text-lg">Soporte Técnico</h3>
+                                <span class="text-rose-400 font-mono text-xs">95% DOMINIO</span>
+                            </div>
+                        </div>
+                        <svg class="w-5 h-5 text-rose-400 group-hover:rotate-180 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </div>
+                    
+                    <div class="h-1.5 bg-gray-800 rounded-full overflow-hidden mb-4">
+                        <div class="h-full bg-gradient-to-r from-rose-500 to-rose-400 rounded-full" style="width: 95%"></div>
+                    </div>
+
+                    <div class="skill-details max-h-0 overflow-hidden group-hover:max-h-96 transition-all duration-500">
+                        <div class="pt-4 border-t border-rose-900/30 space-y-3">
+                            <div class="skill-item flex items-center gap-2 text-sm">
+                                <span class="w-2 h-2 bg-rose-400 rounded-full"></span>
+                                <span class="text-gray-300">Nivel 1</span>
+                                <span class="text-gray-500 text-xs ml-auto">Helpdesk/Triage</span>
+                            </div>
+                            <div class="skill-item flex items-center gap-2 text-sm">
+                                <span class="w-2 h-2 bg-rose-400 rounded-full"></span>
+                                <span class="text-gray-300">Nivel 2</span>
+                                <span class="text-gray-500 text-xs ml-auto">Diagnóstico Avanzado</span>
+                            </div>
+                            <div class="skill-item flex items-center gap-2 text-sm">
+                                <span class="w-2 h-2 bg-rose-400 rounded-full"></span>
+                                <span class="text-gray-300">Nivel 3</span>
+                                <span class="text-gray-500 text-xs ml-auto">Escalamiento/Infra</span>
+                            </div>
+                            <div class="skill-item flex items-center gap-2 text-sm">
+                                <span class="w-2 h-2 bg-rose-400 rounded-full"></span>
+                                <span class="text-gray-300">MobaXterm</span>
+                                <span class="text-gray-500 text-xs ml-auto">Remote Tools</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Administración de Sistemas -->
+                <div class="skill-card group relative bg-[#0f1629] border border-cyan-900/30 rounded-xl p-6 hover:border-cyan-500/60 transition-all duration-300 hover:shadow-[0_0_30px_rgba(6,182,212,0.15)]">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 bg-blue-500/10 border border-blue-500/30 rounded-lg flex items-center justify-center">
+                                <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-white font-bold text-lg">Administración de Sistemas</h3>
+                                <span class="text-blue-400 font-mono text-xs">87% DOMINIO</span>
+                            </div>
+                        </div>
+                        <svg class="w-5 h-5 text-blue-400 group-hover:rotate-180 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </div>
+                    
+                    <div class="h-1.5 bg-gray-800 rounded-full overflow-hidden mb-4">
+                        <div class="h-full bg-gradient-to-r from-blue-500 to-blue-400 rounded-full" style="width: 87%"></div>
+                    </div>
+
+                    <div class="skill-details max-h-0 overflow-hidden group-hover:max-h-96 transition-all duration-500">
+                        <div class="pt-4 border-t border-blue-900/30 space-y-3">
+                            <div class="skill-item flex items-center gap-2 text-sm">
+                                <span class="w-2 h-2 bg-blue-400 rounded-full"></span>
+                                <span class="text-gray-300">Microsoft 365 Admin</span>
+                                <span class="text-gray-500 text-xs ml-auto">Licenciamiento</span>
+                            </div>
+                            <div class="skill-item flex items-center gap-2 text-sm">
+                                <span class="w-2 h-2 bg-blue-400 rounded-full"></span>
+                                <span class="text-gray-300">WordPress</span>
+                                <span class="text-gray-500 text-xs ml-auto">CMS/Gestión Web</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Footer de la sección -->
+            <div class="mt-12 p-6 bg-[#0f1629] border border-cyan-900/30 rounded-xl">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-cyan-500/10 border border-cyan-500/30 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="text-white font-bold">Perfil DevOps & Infraestructura</h4>
+                        <p class="text-gray-400 text-sm mt-1">
+                            Gestión integral de infraestructura tecnológica, automatización de procesos, 
+                            monitoreo proactivo y soporte técnico multinivel en entornos empresariales.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================================================
+         5. SECCIÓN PRINCIPAL: LABORATORIO DE ARQUITECTURA DEL COMPUTADOR
+         (ESCALABLE POR SESIONES DIDÁCTICAS: SD 1 A SD 4)
+         ========================================================================= -->
+    <section id="laboratorio" class="py-20 lg:py-28 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Encabezado de Sección -->
+            <div class="text-center max-w-3xl mx-auto mb-12 space-y-3">
+                <span class="inline-block px-3 py-1 rounded-full text-xs font-mono bg-cyan-500/10 text-cyan-400 border border-cyan-500/30">
+                    EVOLUCIÓN DEL TRAYECTO I
+                </span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white">
+                    Laboratorio de Arquitectura del Computador
+                </h2>
+                <p class="text-slate-400 text-sm sm:text-base">
+                    Selecciona una Sesión Didáctica para explorar las prácticas de laboratorio, análisis técnicos y reflexiones individuales de aprendizaje.
+                </p>
+            </div>
+
+            <!-- =====================================================================
+                 SELECTOR DE PESTAÑAS (TABS) POR SESIÓN DIDÁCTICA
+                 Cuando avances a la SD 2, SD 3 o SD 4, solo debes activar su panel
+                 correspondiente más abajo en el HTML y en el objeto JS "practicasDB".
+                 ===================================================================== -->
+            <div class="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 mb-10" role="tablist">
+                <button onclick="cambiarSesion('sd1')" id="tab-sd1" class="sd-tab px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-cyan-400 text-slate-950 shadow-neon">
+                    SD 1: Fundamentos de Arquitectura
+                </button>
+                <button onclick="cambiarSesion('sd2')" id="tab-sd2" class="sd-tab px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all glass-panel text-slate-300 hover:text-cyan-300">
+                    SD 2: Ensamblaje y Componentes
+                </button>
+                <button onclick="cambiarSesion('sd3')" id="tab-sd3" class="sd-tab px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all glass-panel text-slate-300 hover:text-cyan-300">
+                    SD 3: Mantenimiento Preventivo
+                </button>
+                <button onclick="cambiarSesion('sd4')" id="tab-sd4" class="sd-tab px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all glass-panel text-slate-300 hover:text-cyan-300">
+                    SD 4: Sistemas Operativos
+                </button>
+            </div>
+
+            <!-- =====================================================================
+                 CONTENEDOR SD 1: FUNDAMENTOS DE ARQUITECTURA (ACTIVA CON 5 PRÁCTICAS)
+                 ===================================================================== -->
+            <div id="panel-sd1" class="sd-panel space-y-8">
+                
+                <!-- Barra de Filtros por Tipo de Actividad dentro de SD 1 -->
+                <div class="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-slate-800/80">
+                    <div class="flex flex-wrap items-center gap-2">
+                        <button onclick="filtrarActividades('todas')" data-filter="todas" class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-mono font-semibold bg-cyan-500/20 text-cyan-300 border border-cyan-400/40 transition-all">
+                            Todas (5)
+                        </button>
+                        <button onclick="filtrarActividades('Cuadro Comparativo')" data-filter="Cuadro Comparativo" class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-mono text-slate-400 hover:text-white bg-slate-900/70 border border-slate-800 transition-all">
+                            Cuadros Comparativos (3)
+                        </button>
+                        <button onclick="filtrarActividades('Infografía')" data-filter="Infografía" class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-mono text-slate-400 hover:text-white bg-slate-900/70 border border-slate-800 transition-all">
+                            Infografía (1)
+                        </button>
+                        <button onclick="filtrarActividades('Ensayo')" data-filter="Ensayo" class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-mono text-slate-400 hover:text-white bg-slate-900/70 border border-slate-800 transition-all">
+                            Ensayo (1)
+                        </button>
+                    </div>
+
+                    <span class="text-xs font-mono text-slate-400">
+                        Ponderación SD1: <strong class="text-cyan-400">15%</strong>
+                    </span>
+                </div>
+
+                <!-- Grid de las 5 Tarjetas de Prácticas de la SD 1 -->
+                <div id="grid-sd1" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    
+                    <!-- TARJETA 1: Computadoras Actuales vs. Cuánticas -->
+                    <article data-category="Cuadro Comparativo" class="practice-card glass-card rounded-2xl overflow-hidden flex flex-col justify-between">
+                        <div>
+                            <!-- Cabecera visual SVG temática -->
+                            <div class="h-40 bg-gradient-to-br from-slate-900 via-[#0c1d30] to-cyan-950/50 p-5 relative flex items-center justify-between border-b border-cyan-500/15">
+                                <span class="absolute top-3.5 right-3.5 px-2.5 py-1 rounded-md text-[11px] font-mono font-semibold bg-cyan-500/15 text-cyan-300 border border-cyan-400/30">
+                                    Cuadro Comparativo
+                                </span>
+                                <span class="absolute top-3.5 left-3.5 text-[11px] font-mono text-slate-400">
+                                    07 Nov 2026
+                                </span>
+                                <div class="mt-4 flex items-center gap-4">
+                                    <div class="w-12 h-12 rounded-xl bg-cyan-400/10 border border-cyan-400/30 flex items-center justify-center text-cyan-400">
+                                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
+                                    </div>
+                                    <div>
+                                        <span class="text-[11px] font-mono text-cyan-400 block">PRÁCTICA #01</span>
+                                        <span class="text-xs text-slate-300">Bit vs. Cúbit (8 Criterios)</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Cuerpo de tarjeta -->
+                            <div class="p-6 space-y-3">
+                                <h3 class="text-lg font-bold text-white leading-snug">
+                                    Análisis Comparativo: Computadoras Actuales vs. Cuánticas
+                                </h3>
+                                <p class="text-sm text-slate-400 leading-relaxed">
+                                    Contraste técnico entre el modelo determinista de Von Neumann basado en silicio y los sistemas cuánticos probabilísticos basados en superposición y criogenia.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Pie de tarjeta con botón para abrir Modal -->
+                        <div class="px-6 pb-6 pt-2">
+                            <button onclick="abrirModal('act1')" class="w-full py-2.5 px-4 rounded-xl bg-cyan-500/10 hover:bg-cyan-400 text-cyan-300 hover:text-slate-950 border border-cyan-400/30 font-semibold text-xs sm:text-sm transition-all flex items-center justify-center gap-2">
+                                <span>Ver Práctica y Reflexión</span>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                            </button>
+                        </div>
+                    </article>
+
+                    <!-- TARJETA 2: Infografía Algoritmo Cuántico de Shor -->
+                    <article data-category="Infografía" class="practice-card glass-card rounded-2xl overflow-hidden flex flex-col justify-between">
+                        <div>
+                            <div class="h-40 bg-gradient-to-br from-slate-900 via-[#101830] to-sky-950/50 p-5 relative flex items-center justify-between border-b border-cyan-500/15">
+                                <span class="absolute top-3.5 right-3.5 px-2.5 py-1 rounded-md text-[11px] font-mono font-semibold bg-sky-500/15 text-sky-300 border border-sky-400/30">
+                                    Infografía
+                                </span>
+                                <span class="absolute top-3.5 left-3.5 text-[11px] font-mono text-slate-400">
+                                    10 Nov 2026
+                                </span>
+                                <div class="mt-4 flex items-center gap-4">
+                                    <div class="w-12 h-12 rounded-xl bg-sky-400/10 border border-sky-400/30 flex items-center justify-center text-sky-400">
+                                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                                    </div>
+                                    <div>
+                                        <span class="text-[11px] font-mono text-sky-400 block">PRÁCTICA #02</span>
+                                        <span class="text-xs text-slate-300">Factorización & RSA</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="p-6 space-y-3">
+                                <h3 class="text-lg font-bold text-white leading-snug">
+                                    Infografía: El Algoritmo Cuántico de Shor
+                                </h3>
+                                <p class="text-sm text-slate-400 leading-relaxed">
+                                    Esquema visual sobre la factorización polinómica de enteros mediante Transformada Cuántica de Fourier (QFT) y su impacto en la criptografía moderna.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="px-6 pb-6 pt-2">
+                            <button onclick="abrirModal('act2')" class="w-full py-2.5 px-4 rounded-xl bg-cyan-500/10 hover:bg-cyan-400 text-cyan-300 hover:text-slate-950 border border-cyan-400/30 font-semibold text-xs sm:text-sm transition-all flex items-center justify-center gap-2">
+                                <span>Ver Práctica y Reflexión</span>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                            </button>
+                        </div>
+                    </article>
+
+                    <!-- TARJETA 3: Tabla Comparativa Identificación de CPU -->
+                    <article data-category="Cuadro Comparativo" class="practice-card glass-card rounded-2xl overflow-hidden flex flex-col justify-between">
+                        <div>
+                            <div class="h-40 bg-gradient-to-br from-slate-900 via-[#0c1d30] to-indigo-950/50 p-5 relative flex items-center justify-between border-b border-cyan-500/15">
+                                <span class="absolute top-3.5 right-3.5 px-2.5 py-1 rounded-md text-[11px] font-mono font-semibold bg-cyan-500/15 text-cyan-300 border border-cyan-400/30">
+                                    Cuadro Comparativo
+                                </span>
+                                <span class="absolute top-3.5 left-3.5 text-[11px] font-mono text-slate-400">
+                                    12 Nov 2026
+                                </span>
+                                <div class="mt-4 flex items-center gap-4">
+                                    <div class="w-12 h-12 rounded-xl bg-indigo-400/10 border border-indigo-400/30 flex items-center justify-center text-indigo-400">
+                                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/></svg>
+                                    </div>
+                                    <div>
+                                        <span class="text-[11px] font-mono text-indigo-400 block">PRÁCTICA #03</span>
+                                        <span class="text-xs text-slate-300">Ryzen 7 / Ryzen 5 / Celeron</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="p-6 space-y-3">
+                                <h3 class="text-lg font-bold text-white leading-snug">
+                                    Tabla Comparativa: Identificación de CPU y Características
+                                </h3>
+                                <p class="text-sm text-slate-400 leading-relaxed">
+                                    Auditoría técnica de tres microprocesadores reales evaluando generación, zócalo (Socket), núcleos, hilos, frecuencias, caché y recomendaciones de cuidado.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="px-6 pb-6 pt-2">
+                            <button onclick="abrirModal('act3')" class="w-full py-2.5 px-4 rounded-xl bg-cyan-500/10 hover:bg-cyan-400 text-cyan-300 hover:text-slate-950 border border-cyan-400/30 font-semibold text-xs sm:text-sm transition-all flex items-center justify-center gap-2">
+                                <span>Ver Práctica y Reflexión</span>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                            </button>
+                        </div>
+                    </article>
+
+                    <!-- TARJETA 4: Inventario Técnico de Herramientas -->
+                    <article data-category="Cuadro Comparativo" class="practice-card glass-card rounded-2xl overflow-hidden flex flex-col justify-between">
+                        <div>
+                            <div class="h-40 bg-gradient-to-br from-slate-900 via-[#0c1d30] to-emerald-950/40 p-5 relative flex items-center justify-between border-b border-cyan-500/15">
+                                <span class="absolute top-3.5 right-3.5 px-2.5 py-1 rounded-md text-[11px] font-mono font-semibold bg-cyan-500/15 text-cyan-300 border border-cyan-400/30">
+                                    Cuadro Comparativo
+                                </span>
+                                <span class="absolute top-3.5 left-3.5 text-[11px] font-mono text-slate-400">
+                                    14 Nov 2026
+                                </span>
+                                <div class="mt-4 flex items-center gap-4">
+                                    <div class="w-12 h-12 rounded-xl bg-emerald-400/10 border border-emerald-400/30 flex items-center justify-center text-emerald-400">
+                                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"/></svg>
+                                    </div>
+                                    <div>
+                                        <span class="text-[11px] font-mono text-emerald-400 block">PRÁCTICA #04</span>
+                                        <span class="text-xs text-slate-300">Taller Físico & Software</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="p-6 space-y-3">
+                                <h3 class="text-lg font-bold text-white leading-snug">
+                                    Inventario Técnico: Herramientas de Hardware y Software
+                                </h3>
+                                <p class="text-sm text-slate-400 leading-relaxed">
+                                    Catalogación de implementos físicos antiestáticos/térmicos y software de telemetría (CrystalDiskInfo, CPU-Z, Administrador de Tareas).
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="px-6 pb-6 pt-2">
+                            <button onclick="abrirModal('act4')" class="w-full py-2.5 px-4 rounded-xl bg-cyan-500/10 hover:bg-cyan-400 text-cyan-300 hover:text-slate-950 border border-cyan-400/30 font-semibold text-xs sm:text-sm transition-all flex items-center justify-center gap-2">
+                                <span>Ver Práctica y Reflexión</span>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                            </button>
+                        </div>
+                    </article>
+
+                    <!-- TARJETA 5: Ensayo Académico Más Allá del Silicio -->
+                    <article data-category="Ensayo" class="practice-card glass-card rounded-2xl overflow-hidden flex flex-col justify-between">
+                        <div>
+                            <div class="h-40 bg-gradient-to-br from-slate-900 via-[#151830] to-purple-950/40 p-5 relative flex items-center justify-between border-b border-cyan-500/15">
+                                <span class="absolute top-3.5 right-3.5 px-2.5 py-1 rounded-md text-[11px] font-mono font-semibold bg-purple-500/15 text-purple-300 border border-purple-400/30">
+                                    Ensayo
+                                </span>
+                                <span class="absolute top-3.5 left-3.5 text-[11px] font-mono text-slate-400">
+                                    16 Nov 2026
+                                </span>
+                                <div class="mt-4 flex items-center gap-4">
+                                    <div class="w-12 h-12 rounded-xl bg-purple-400/10 border border-purple-400/30 flex items-center justify-center text-purple-400">
+                                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                                    </div>
+                                    <div>
+                                        <span class="text-[11px] font-mono text-purple-400 block">PRÁCTICA #05</span>
+                                        <span class="text-xs text-slate-300">Ley de Moore & Futuro</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="p-6 space-y-3">
+                                <h3 class="text-lg font-bold text-white leading-snug">
+                                    Ensayo Académico: Más Allá del Silicio
+                                </h3>
+                                <p class="text-sm text-slate-400 leading-relaxed">
+                                    Análisis crítico sobre el agotamiento físico del silicio, el cuello de botella Von Neumann y la transición hacia arquitecturas cuánticas, fotónicas y neuromórficas.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="px-6 pb-6 pt-2">
+                            <button onclick="abrirModal('act5')" class="w-full py-2.5 px-4 rounded-xl bg-cyan-500/10 hover:bg-cyan-400 text-cyan-300 hover:text-slate-950 border border-cyan-400/30 font-semibold text-xs sm:text-sm transition-all flex items-center justify-center gap-2">
+                                <span>Ver Práctica y Reflexión</span>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                            </button>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+
+            <!-- =====================================================================
+                 CONTENEDORES PREPARADOS PARA FUTURAS SESIONES DIDÁCTICAS (SD2, SD3, SD4)
+                 GUÍA PARA ESCALAR EL PORTAFOLIO:
+                 Cuando comiences la SD 2, reemplaza el bloque "Próximamente" dentro
+                 de #panel-sd2 por un <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                 copiando la estructura de <article class="practice-card ..."> de SD 1.
+                 ===================================================================== -->
+            
+            <!-- PANEL SD 2 -->
+            <div id="panel-sd2" class="sd-panel hidden">
+                <div class="glass-panel rounded-3xl p-10 sm:p-14 text-center max-w-2xl mx-auto space-y-4">
+                    <div class="w-16 h-16 rounded-2xl bg-cyan-500/10 border border-cyan-400/30 text-cyan-400 flex items-center justify-center mx-auto">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    </div>
+                    <span class="inline-block px-3 py-1 rounded-full text-xs font-mono bg-amber-500/10 text-amber-300 border border-amber-400/30">
+                        SESIÓN DIDÁCTICA 2 // EN PREPARACIÓN
+                    </span>
+                    <h3 class="text-2xl font-bold text-white">Ensamblaje y Componentes Internos</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Este módulo está arquitectónicamente preparado para alojar las prácticas de laboratorio, diagramas de placa base, memorias y buses de datos correspondientes a la Sesión Didáctica 2.
+                    </p>
+                </div>
+            </div>
+
+            <!-- PANEL SD 3 -->
+            <div id="panel-sd3" class="sd-panel hidden">
+                <div class="glass-panel rounded-3xl p-10 sm:p-14 text-center max-w-2xl mx-auto space-y-4">
+                    <div class="w-16 h-16 rounded-2xl bg-cyan-500/10 border border-cyan-400/30 text-cyan-400 flex items-center justify-center mx-auto">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                    </div>
+                    <span class="inline-block px-3 py-1 rounded-full text-xs font-mono bg-amber-500/10 text-amber-300 border border-amber-400/30">
+                        SESIÓN DIDÁCTICA 3 // EN PREPARACIÓN
+                    </span>
+                    <h3 class="text-2xl font-bold text-white">Mantenimiento Preventivo y Correctivo</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Espacio reservado para informes de mantenimiento físico, protocolos de limpieza, detección de fallas y optimización térmica de equipos de cómputo.
+                    </p>
+                </div>
+            </div>
+
+            <!-- PANEL SD 4 -->
+            <div id="panel-sd4" class="sd-panel hidden">
+                <div class="glass-panel rounded-3xl p-10 sm:p-14 text-center max-w-2xl mx-auto space-y-4">
+                    <div class="w-16 h-16 rounded-2xl bg-cyan-500/10 border border-cyan-400/30 text-cyan-400 flex items-center justify-center mx-auto">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                    </div>
+                    <span class="inline-block px-3 py-1 rounded-full text-xs font-mono bg-amber-500/10 text-amber-300 border border-amber-400/30">
+                        SESIÓN DIDÁCTICA 4 // EN PREPARACIÓN
+                    </span>
+                    <h3 class="text-2xl font-bold text-white">Instalación y Configuración de Sistemas Operativos</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Espacio reservado para las evidencias de particionamiento, entornos virtualizados, sistemas operativos libres/propietarios y gestión de controladores.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- =========================================================================
+         6. FOOTER INSTITUCIONAL LIMPIO
+         ========================================================================= -->
+    <footer class="border-t border-cyan-500/15 bg-[#050a10] py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div class="text-center sm:text-left space-y-1">
+                <p class="text-sm font-bold text-white">
+                    UNETI <span class="text-cyan-400">•</span> PNF en Ingeniería en Informática
+                </p>
+                <p class="text-xs text-slate-400">
+                    Unidad Curricular: Arquitectura del Computador | Caracas, Venezuela — 2026
+                </p>
+            </div>
+
+            <div class="flex items-center gap-6 text-xs font-medium text-slate-400">
+                <a href="#inicio" class="hover:text-cyan-400 transition-colors">Inicio</a>
+                <a href="#sobre-mi" class="hover:text-cyan-400 transition-colors">Autor</a>
+                <a href="#laboratorio" class="hover:text-cyan-400 transition-colors">Laboratorio</a>
+                <a href="#inicio" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-cyan-400 hover:border-cyan-400/40 transition-all">
+                    <span>Subir</span>
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/></svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- =========================================================================
+         VENTANA MODAL INTERACTIVA PARA VISUALIZAR CADA PRÁCTICA Y SU REFLEXIÓN
+         ========================================================================= -->
+    <div id="practice-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-3 sm:p-6 bg-slate-950/85 backdrop-blur-md" role="dialog" aria-modal="true">
+        <div class="glass-panel w-full max-w-4xl max-h-[90vh] rounded-2xl border border-cyan-400/35 shadow-neon-strong flex flex-col overflow-hidden">
+            
+            <!-- Cabecera del Modal -->
+            <div class="px-6 py-4 bg-[#08101a] border-b border-cyan-500/20 flex items-center justify-between gap-4">
+                <div>
+                    <div class="flex items-center gap-2.5">
+                        <span id="modal-category" class="px-2.5 py-0.5 rounded text-[11px] font-mono font-semibold bg-cyan-500/15 text-cyan-300 border border-cyan-400/30">
+                            Categoría
+                        </span>
+                        <span id="modal-date" class="text-xs font-mono text-slate-400">
+                            Fecha
+                        </span>
+                    </div>
+                    <h3 id="modal-title" class="text-lg sm:text-xl font-bold text-white mt-1">
+                        Título de la Práctica
+                    </h3>
+                </div>
+
+                <button onclick="cerrarModal()" class="p-2 rounded-xl bg-slate-900 hover:bg-rose-500/20 text-slate-400 hover:text-rose-300 border border-slate-800 transition-colors" aria-label="Cerrar ventana">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+
+            <!-- Contenido Desplazable del Modal (Desarrollo + Reflexión Individual) -->
+            <div id="modal-body" class="p-6 sm:p-8 overflow-y-auto space-y-6 text-slate-300 text-sm sm:text-base leading-relaxed">
+                <!-- El contenido se inyecta dinámicamente desde JavaScript -->
+            </div>
+
+            <!-- Pie del Modal -->
+            <div class="px-6 py-3.5 bg-[#08101a] border-t border-slate-800 flex items-center justify-between">
+                <span class="text-xs font-mono text-slate-400">UNETI • Evidencia de Laboratorio SD1</span>
+                <button onclick="cerrarModal()" class="px-4 py-2 rounded-xl bg-cyan-400 text-slate-950 font-bold text-xs sm:text-sm hover:brightness-110 transition-all">
+                    Cerrar Vista
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- =========================================================================
+         LÓGICA JAVASCRIPT (PESTAÑAS, FILTROS Y BASE DE DATOS DE PRÁCTICAS)
+         ========================================================================= -->
+    <script>
+        // 1. Toggle del menú móvil
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 2. Cambio entre Sesiones Didácticas (SD1, SD2, SD3, SD4)
+        function cambiarSesion(sdId) {
+            // Ocultar todos los paneles
+            document.querySelectorAll('.sd-panel').forEach(panel => {
+                panel.classList.add('hidden');
+            });
+            // Mostrar el panel seleccionado
+            document.getElementById('panel-' + sdId).classList.remove('hidden');
+
+            // Actualizar estilos de los botones de pestaña
+            document.querySelectorAll('.sd-tab').forEach(btn => {
+                btn.className = 'sd-tab px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all glass-panel text-slate-300 hover:text-cyan-300';
+            });
+            const activeBtn = document.getElementById('tab-' + sdId);
+            activeBtn.className = 'sd-tab px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-cyan-400 text-slate-950 shadow-neon';
+        }
+
+        // 3. Filtro de tarjetas por categoría dentro de SD1
+        function filtrarActividades(categoria) {
+            const cards = document.querySelectorAll('#grid-sd1 .practice-card');
+            cards.forEach(card => {
+                if (categoria === 'todas' || card.getAttribute('data-category') === categoria) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+
+            // Actualizar estado visual de los botones de filtro
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                if (btn.getAttribute('data-filter') === categoria) {
+                    btn.className = 'filter-btn px-3.5 py-1.5 rounded-lg text-xs font-mono font-semibold bg-cyan-500/20 text-cyan-300 border border-cyan-400/40 transition-all';
+                } else {
+                    btn.className = 'filter-btn px-3.5 py-1.5 rounded-lg text-xs font-mono text-slate-400 hover:text-white bg-slate-900/70 border border-slate-800 transition-all';
+                }
+            });
+        }
+
+        // 4. Base de datos con el contenido detallado y reflexiones de las 5 prácticas de SD1
+        // NOTA: Puedes editar libremente el texto dentro de "reflexion" para adaptarlo aún más a tu estilo personal.
+        const practicasDB = {
+            act1: {
+                categoria: 'Cuadro Comparativo',
+                fecha: '07 de Noviembre de 2026',
+                titulo: 'Análisis Comparativo: Computadoras Actuales vs. Computadores Cuánticos',
+                htmlContenido: `
+                    <p class="text-slate-300">
+                        Estudio contrastivo entre el paradigma computacional clásico (determinista y secuencial) y el paradigma cuántico (probabilístico y paralelo masivo) a través de 8 dimensiones fundamentales de arquitectura:
+                    </p>
+                    <div class="overflow-x-auto rounded-xl border border-slate-800">
+                        <table class="w-full text-left border-collapse text-xs sm:text-sm">
+                            <thead>
+                                <tr class="bg-slate-900/90 text-cyan-300 font-mono border-b border-slate-800">
+                                    <th class="p-3.5">Criterio</th>
+                                    <th class="p-3.5">Computadoras Actuales (Clásicas)</th>
+                                    <th class="p-3.5">Computadores Cuánticos</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-800/80 bg-slate-950/50">
+                                <tr>
+                                    <td class="p-3.5 font-semibold text-white">1. Características</td>
+                                    <td class="p-3.5">Basadas en determinismo lógico y física clásica; ejecutan instrucciones de forma predecible y secuencial.</td>
+                                    <td class="p-3.5">Regidas por la mecánica cuántica; naturaleza probabilística que evalúa múltiples estados simultáneamente.</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3.5 font-semibold text-white">2. Arquitectura</td>
+                                    <td class="p-3.5">Modelo de Von Neumann (CPU, ALU, Memoria RAM y buses físicos de comunicación).</td>
+                                    <td class="p-3.5">Procesadores cuánticos en entornos de criogenia extrema (cercanos al cero absoluto) asistidos por sistemas clásicos.</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3.5 font-semibold text-white">3. Almacenamiento</td>
+                                    <td class="p-3.5"><strong>Bit:</strong> estado binario excluyente (0 o 1) en soportes magnéticos o celdas SSD NVMe.</td>
+                                    <td class="p-3.5"><strong>Cúbit (Qubit):</strong> aprovecha la superposición (0 y 1 a la vez) y el entrelazamiento cuántico.</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3.5 font-semibold text-white">4. Dispositivos</td>
+                                    <td class="p-3.5">Obleas de silicio y microtransistores a escala nanométrica.</td>
+                                    <td class="p-3.5">Circuitos superconductores, trampas de iones y sistemas fotónicos manipulados por láser.</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3.5 font-semibold text-white">5. Programación</td>
+                                    <td class="p-3.5">Lenguajes procedurales y orientados a objetos (Python, C++, C, Java) mediante compiladores.</td>
+                                    <td class="p-3.5">Compuertas lógicas cuánticas y SDKs especializados como <strong>Qiskit</strong> (IBM) o <strong>Cirq</strong> (Google).</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3.5 font-semibold text-white">6. Dinámica</td>
+                                    <td class="p-3.5">Ejecución lineal o multihilo; calcula un resultado a la vez mediante lógica booleana.</td>
+                                    <td class="p-3.5">Manipulación de ondas de probabilidad en paralelo masivo con colapso de medición final.</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3.5 font-semibold text-white">7. Modelos Destacados</td>
+                                    <td class="p-3.5">AMD Ryzen, Intel Core, Apple Silicon (M-Series) y supercomputadores como Frontier y Fugaku.</td>
+                                    <td class="p-3.5">IBM Quantum System (Eagle, Heron), Google Sycamore y sistemas D-Wave.</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3.5 font-semibold text-white">8. Ventajas y Limitaciones</td>
+                                    <td class="p-3.5"><span class="text-emerald-400">Ventaja:</span> Alta madurez, estabilidad y bajo costo.<br><span class="text-rose-400">Límite:</span> Barrera física del silicio y lentitud en problemas combinatorios gigantes.</td>
+                                    <td class="p-3.5"><span class="text-emerald-400">Ventaja:</span> Velocidad exponencial en criptografía y simulación molecular.<br><span class="text-rose-400">Límite:</span> Alta sensibilidad (decoherencia) y costos prohibitivos.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                `,
+                reflexion: `Al realizar esta comparativa, comprendí que pasar de las computadoras actuales a las cuánticas no es simplemente una cuestión de acelerar el hardware, sino de transformar por completo la lógica con la que procesamos la información. Estudiar los límites físicos de miniaturización del silicio y analizar cómo la superposición y el entrelazamiento cuántico resuelven en segundos problemas que a una máquina clásica le tomarían milenios, demuestra que la arquitectura actual es una etapa evolutiva. Como futuro Ingeniero en Informática, este análisis me impulsa a dominar los fundamentos físicos y arquitectónicos para estar preparado ante los cambios de paradigma tecnológico.`
+            },
+
+            act2: {
+                categoria: 'Infografía',
+                fecha: '10 de Noviembre de 2026',
+                titulo: 'Infografía Técnica: El Algoritmo Cuántico de Shor',
+                htmlContenido: `
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <!-- Bloque A -->
+                        <div class="p-4 rounded-xl bg-slate-900/80 border border-cyan-500/25 space-y-2">
+                            <span class="text-xs font-mono text-cyan-400 font-bold">01 // CONCEPTO CLAVE</span>
+                            <h4 class="font-bold text-white text-base">¿Qué es el Algoritmo de Shor?</h4>
+                            <p class="text-xs sm:text-sm text-slate-300">
+                                Formulado por Peter Shor en 1994, es un algoritmo cuántico que descompone números enteros grandes (N) en sus factores primos (p × q) en tiempo polinómico, aprovechando la superposición y el entrelazamiento de los cúbits.
+                            </p>
+                        </div>
+
+                        <!-- Bloque B -->
+                        <div class="p-4 rounded-xl bg-slate-900/80 border border-sky-500/25 space-y-2">
+                            <span class="text-xs font-mono text-sky-400 font-bold">02 // ARQUITECTURA DE EJECUCIÓN</span>
+                            <h4 class="font-bold text-white text-base">Funcionamiento Paso a Paso</h4>
+                            <ul class="text-xs sm:text-sm text-slate-300 space-y-1.5 list-disc list-inside">
+                                <li><strong>Entrada:</strong> Número entero compuesto N.</li>
+                                <li><strong>Superposición:</strong> Aplicación de puertas Hadamard.</li>
+                                <li><strong>QFT:</strong> Transformada Cuántica de Fourier para hallar el período (r).</li>
+                                <li><strong>Salida:</strong> Obtención de factores primos (p, q).</li>
+                            </ul>
+                        </div>
+
+                        <!-- Bloque C -->
+                        <div class="p-4 rounded-xl bg-slate-900/80 border border-rose-500/25 space-y-2">
+                            <span class="text-xs font-mono text-rose-400 font-bold">03 // DESAFÍO CRIPTOGRÁFICO</span>
+                            <h4 class="font-bold text-white text-base">Impacto en Ciberseguridad</h4>
+                            <p class="text-xs sm:text-sm text-slate-300">
+                                Mientras una supercomputadora clásica tardaría milenios en romper el cifrado <strong>RSA y ECC</strong> que protege la banca e internet, un ordenador cuántico escalable con Shor lo haría en minutos, impulsando la <strong>Criptografía Post-Cuántica</strong>.
+                            </p>
+                        </div>
+                    </div>
+                `,
+                reflexion: `Investigar y sintetizar visualmente el Algoritmo de Shor me permitió entender que la verdadera ventaja de la computación cuántica no radica únicamente en componentes más veloces, sino en cómo la física y la matemática redefinen la resolución de problemas complejos. Comprender que este algoritmo puede vulnerar los sistemas criptográficos actuales que protegen transacciones bancarias y comunicaciones críticas me alerta sobre la urgencia de prepararnos en ciberseguridad y adoptar estándares de criptografía post-cuántica en nuestra formación profesional.`
+            },
+
+            act3: {
+                categoria: 'Cuadro Comparativo',
+                fecha: '12 de Noviembre de 2026',
+                titulo: 'Tabla Comparativa: Identificación de CPU y Características Técnicas',
+                htmlContenido: `
+                    <p class="text-slate-300">
+                        Evaluación técnica comparativa de tres unidades centrales de procesamiento (CPU) de distintas gamas arquitectónicas, detallando especificaciones y protocolos de mantenimiento:
+                    </p>
+                    <div class="overflow-x-auto rounded-xl border border-slate-800">
+                        <table class="w-full text-left border-collapse text-xs sm:text-sm">
+                            <thead>
+                                <tr class="bg-slate-900/90 text-cyan-300 font-mono border-b border-slate-800">
+                                    <th class="p-3.5">Especificación</th>
+                                    <th class="p-3.5">Equipo 1 (Alto Rendimiento)</th>
+                                    <th class="p-3.5">Equipo 2 (Gama Media)</th>
+                                    <th class="p-3.5">Equipo 3 (Bajo Consumo)</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-800/80 bg-slate-950/50">
+                                <tr>
+                                    <td class="p-3.5 font-semibold text-white">Procesador</td>
+                                    <td class="p-3.5 text-cyan-300 font-semibold">AMD Ryzen 7 5700G (Radeon Graphics)</td>
+                                    <td class="p-3.5 text-sky-300 font-semibold">AMD Ryzen 5 2400G (Radeon Vega)</td>
+                                    <td class="p-3.5 text-slate-300 font-semibold">Intel Celeron CPU N2805</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3.5 font-semibold text-white">Generación</td>
+                                    <td class="p-3.5">Zen 3 (5ta Generación)</td>
+                                    <td class="p-3.5">Zen (1ra Gen / Raven Ridge)</td>
+                                    <td class="p-3.5">Silvermont (Airmont)</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3.5 font-semibold text-white">Zócalo (Socket)</td>
+                                    <td class="p-3.5 font-mono">AM4</td>
+                                    <td class="p-3.5 font-mono">AM4</td>
+                                    <td class="p-3.5 font-mono">BGA1170 (Soldado en placa)</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3.5 font-semibold text-white">Características Técnicas</td>
+                                    <td class="p-3.5">8 núcleos, 16 hilos, 3.80 GHz (Boost 4.6 GHz), Caché L3 16 MB, Radeon Vega 8.</td>
+                                    <td class="p-3.5">4 núcleos, 8 hilos, 3.90 GHz, Caché L3 4 MB, Radeon RX Vega 11.</td>
+                                    <td class="p-3.5">2 núcleos, 2 hilos, 1.46 GHz, Caché L2 1 MB, TDP ultra bajo de 4.5W.</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3.5 font-semibold text-white">Uso y Cuidado</td>
+                                    <td class="p-3.5"><strong>Uso:</strong> Multitarea pesada, ingeniería y gaming.<br><strong>Cuidado:</strong> Limpieza periódica de polvo, UPS y flujo de aire óptimo.</td>
+                                    <td class="p-3.5"><strong>Uso:</strong> Ofimática y programación base.<br><strong>Cuidado:</strong> Evitar sobretensiones y monitorear temperatura bajo carga.</td>
+                                    <td class="p-3.5"><strong>Uso:</strong> Tareas ligeras y navegación básica.<br><strong>Cuidado:</strong> No obstruir ventilación pasiva y cuidar batería.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                `,
+                reflexion: `Analizar y comparar estos tres procesadores me permitió comprender de forma empírica cómo escalan los recursos internos del hardware entre una estación de trabajo de alto rendimiento, un equipo de gama media y un procesador móvil de bajo TDP. Identificar las diferencias en arquitectura, memoria caché L2/L3 y tipos de zócalo (como AM4 frente a BGA soldado) consolida el criterio técnico necesario para diagnosticar, actualizar y recomendar equipos de cómputo según las necesidades reales del usuario.`
+            },
+
+            act4: {
+                categoria: 'Cuadro Comparativo',
+                fecha: '14 de Noviembre de 2026',
+                titulo: 'Inventario Técnico: Herramientas de Hardware y Software de Diagnóstico',
+                htmlContenido: `
+                    <div class="space-y-5">
+                        <div>
+                            <h4 class="text-sm font-mono uppercase tracking-wider text-cyan-400 mb-2">A. Implementos Físicos de Taller (Hardware)</h4>
+                            <div class="overflow-x-auto rounded-xl border border-slate-800">
+                                <table class="w-full text-left border-collapse text-xs sm:text-sm">
+                                    <thead>
+                                        <tr class="bg-slate-900/90 text-cyan-300 font-mono border-b border-slate-800">
+                                            <th class="p-3">Implemento</th>
+                                            <th class="p-3">Función Técnica en Mantenimiento</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-slate-800/80 bg-slate-950/50">
+                                        <tr>
+                                            <td class="p-3 font-semibold text-white">Destornilladores de Precisión</td>
+                                            <td class="p-3">Apertura controlada de gabinetes, laptops y remoción segura de tornillería en placas base sin dañar roscas.</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-3 font-semibold text-white">Pasta Térmica</td>
+                                            <td class="p-3">Renovación de la interfaz conductora de calor entre el encapsulado del CPU/GPU y el disipador metálico.</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-3 font-semibold text-white">Alcohol Isopropílico y Brocha Antiestática</td>
+                                            <td class="p-3">Limpieza profunda de circuitos electrónicos, eliminación de grasa, sulfatación y polvo adherido sin dejar residuos húmedos.</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-3 font-semibold text-white">Soplador Eléctrico / Aire Comprimido</td>
+                                            <td class="p-3">Expulsión preventiva de acumulaciones de polvo en disipadores, ventiladores y fuentes de alimentación.</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-3 font-semibold text-white">Pulsera Antiestática</td>
+                                            <td class="p-3">Descarga a tierra de la electricidad estática del técnico para evitar daños por ESD en memorias RAM y microchips.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 class="text-sm font-mono uppercase tracking-wider text-sky-400 mb-2">B. Herramientas de Telemetría y Diagnóstico (Software)</h4>
+                            <div class="overflow-x-auto rounded-xl border border-slate-800">
+                                <table class="w-full text-left border-collapse text-xs sm:text-sm">
+                                    <thead>
+                                        <tr class="bg-slate-900/90 text-sky-300 font-mono border-b border-slate-800">
+                                            <th class="p-3">Software</th>
+                                            <th class="p-3">Aplicación Diagnóstica</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-slate-800/80 bg-slate-950/50">
+                                        <tr>
+                                            <td class="p-3 font-semibold text-white">CrystalDiskInfo</td>
+                                            <td class="p-3">Auditoría preventiva de unidades HDD y SSD mediante tecnología S.M.A.R.T. para evaluar salud, horas de uso y temperatura.</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-3 font-semibold text-white">CPU-Z</td>
+                                            <td class="p-3">Identificación detallada en tiempo real de arquitectura del procesador, multiplicadores, caché, placa madre y módulos RAM.</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-3 font-semibold text-white">Administrador de Tareas (Windows)</td>
+                                            <td class="p-3">Supervisión nativa del rendimiento en vivo de CPU, núcleos lógicos, memoria paginada, disco y procesos activos.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                reflexion: `Catalogar y emplear estas herramientas transforma la visión sobre el soporte técnico: el mantenimiento profesional no consiste únicamente en reinstalar un sistema operativo cuando falla, sino en aplicar protocolos preventivos rigurosos. Combinar la protección electrostática y térmica en el plano físico con el monitoreo S.M.A.R.T. y de sensores mediante software evita fallos catastróficos y demuestra que cuidar el hardware es tan vital como saber programarlo.`
+            },
+
+            act5: {
+                categoria: 'Ensayo',
+                fecha: '16 de Noviembre de 2026',
+                titulo: 'Ensayo Académico: Más Allá del Silicio',
+                htmlContenido: `
+                    <div class="space-y-4 text-slate-300">
+                        <div class="p-4 rounded-xl bg-slate-900/70 border-l-4 border-cyan-400">
+                            <h4 class="font-bold text-white mb-1">Introducción</h4>
+                            <p class="text-sm">
+                                La informática contemporánea atraviesa una paradoja histórica: mientras exprimimos al máximo el rendimiento de los microprocesadores de silicio, las leyes de la física cuántica nos obligan a mirar hacia nuevos horizontes. Durante décadas construimos toda la infraestructura digital sobre cimientos binarios y secuenciales que hoy enfrentan límites físicos infranqueables ante el auge de la inteligencia artificial y el procesamiento masivo de datos.
+                            </p>
+                        </div>
+
+                        <div class="space-y-2">
+                            <h4 class="font-bold text-white">Desarrollo: El Agotamiento de la Ley de Moore y Nuevos Paradigmas</h4>
+                            <p class="text-sm">
+                                El modelo clásico fundamentado en la arquitectura de Von Neumann dominó la computación gracias a la miniaturización constante de transistores. Sin embargo, al acercarnos a escalas subnanométricas, fenómenos como el efecto túnel cuántico y la disipación térmica frenan la Ley de Moore, sumándose al clásico cuello de botella entre memoria y procesador.
+                            </p>
+                            <p class="text-sm">
+                                Frente a este escenario emergen tecnologías disruptivas: la <strong>computación cuántica</strong> (con cúbits en superposición), la <strong>informática fotónica</strong> (que transmite datos mediante fotones a la velocidad de la luz) y los <strong>procesadores neuromórficos</strong> (que imitan la eficiencia sináptica del cerebro humano). Esta transición redefine el perfil del Ingeniero en Informática, exigiendo comprender arquitecturas híbridas donde coexistan sistemas clásicos y cuánticos.
+                            </p>
+                        </div>
+
+                        <div class="p-4 rounded-xl bg-slate-900/70 border-l-4 border-purple-400">
+                            <h4 class="font-bold text-white mb-1">Conclusión</h4>
+                            <p class="text-sm">
+                                Comprender la transición más allá del silicio no es una simple curiosidad teórica, sino una necesidad estratégica para diseñar software e infraestructuras resilientes en las próximas décadas.
+                            </p>
+                        </div>
+                    </div>
+                `,
+                reflexion: `Redactar este ensayo me llevó a reflexionar sobre el horizonte real de la Ingeniería en Informática. A menudo nos enfocamos exclusivamente en dominar los lenguajes o herramientas actuales sin detenernos a pensar que la base física sobre la que corren nuestros programas está cambiando. Comprender que los transistores de silicio tienen un límite físico y que las arquitecturas heterogéneas marcarán el futuro me confirma que la adaptabilidad y el dominio de los fundamentos teóricos son las habilidades más valiosas para un ingeniero.`
+            }
+        };
+
+        // 5. Funciones para abrir y cerrar el Modal de detalle
+        const modal = document.getElementById('practice-modal');
+        const modalCategory = document.getElementById('modal-category');
+        const modalDate = document.getElementById('modal-date');
+        const modalTitle = document.getElementById('modal-title');
+        const modalBody = document.getElementById('modal-body');
+
+        function abrirModal(idActividad) {
+            const data = practicasDB[idActividad];
+            if (!data) return;
+
+            modalCategory.textContent = data.categoria;
+            modalDate.textContent = 'Fecha de creación: ' + data.fecha;
+            modalTitle.textContent = data.titulo;
+
+            // Construimos el contenido del modal incluyendo el bloque destacado de Reflexión Individual
+            modalBody.innerHTML = `
+                <div class="space-y-4">
+                    <h4 class="text-xs font-mono uppercase tracking-wider text-cyan-400">Desarrollo de la Práctica de Laboratorio</h4>
+                    ${data.htmlContenido}
+                </div>
+
+                <!-- BLOQUE DESTACADO: REFLEXIÓN DE APRENDIZAJE INDIVIDUAL (OBLIGATORIO EN RÚBRICA) -->
+                <div class="mt-6 p-5 rounded-2xl bg-gradient-to-r from-cyan-950/50 to-slate-900/90 border border-cyan-400/40 shadow-neon">
+                    <div class="flex items-center gap-2 mb-2">
+                        <svg class="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                        </svg>
+                        <h4 class="text-sm font-mono font-bold uppercase tracking-wider text-cyan-300">
+                            Reflexión de Aprendizaje Individual
+                        </h4>
+                    </div>
+                    <p class="text-sm text-slate-200 leading-relaxed italic">
+                        "${data.reflexion}"
+                    </p>
+                </div>
+            `;
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden'; // Evitar scroll del fondo
+        }
+
+        function cerrarModal() {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = '';
+        }
+
+        // Cerrar modal al hacer clic fuera de la caja o presionar la tecla Escape
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) cerrarModal();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !modal.classList.contains('hidden')) cerrarModal();
+        });
+    </script>
+</body>
+</html>
